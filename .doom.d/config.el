@@ -87,8 +87,8 @@
 ;; Setup irony for flycheck.
 (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)
 
-(require 'elcord)
-(elcord-mode)
+;(require 'elcord)
+;(elcord-mode)
 
 (after! lsp-rust
   (setq lsp-rust-server 'rust-analyzer))

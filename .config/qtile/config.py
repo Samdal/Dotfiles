@@ -9,7 +9,7 @@ from libqtile import layout, bar, widget, hook
 from typing import List  # noqa: F401
 
 mod = "mod4"                                     # Sets mod key to SUPER/WINDOWS
-myTerm = "st"                             # My terminal of choice
+myTerm = "alacritty -e fish"                             # My terminal of choice
 myConfig = "/home/halvard/.config/qtile/config.py"    # The Qtile config file location
 
 keys = [
@@ -50,6 +50,10 @@ keys = [
              lazy.spawn("firefox"),
              desc='Start Firefox'
              ),
+         Key([mod], "v",
+             lazy.spawn("virt-manager"),
+             desc='Start virt-manager'
+             ),
          Key([mod, "shift"], "e",
              lazy.spawn("thunar"),
              desc='Start thunar'
@@ -62,13 +66,33 @@ keys = [
              lazy.spawn("flameshot gui"),
              desc='Take screenshot'
              ),
+         Key([mod], "s",
+             lazy.spawn("steam"),
+             desc='Start Steam'
+             ),
+         Key([mod, "shift"], "l",
+             lazy.spawn("lutris"),
+             desc='Start Lutirs'
+             ),
+         Key([mod], "g",
+             lazy.spawn("gimp"),
+             desc='Start Gimp'
+             ),
+         Key([mod, "shift"], "g",
+             lazy.spawn("godot"),
+             desc='Start Godot'
+             ),
+         Key([mod], "b",
+             lazy.spawn("krita"),
+             desc='Start Krita'
+             ),
          ### Switch focus to specific monitor (out of three)
          Key([mod], "w",
-             lazy.to_screen(1),
+             lazy.to_screen(0),
              desc='Keyboard focus to monitor 1'
              ),
          Key([mod], "e",
-             lazy.to_screen(0),
+             lazy.to_screen(1),
              desc='Keyboard focus to monitor 2'
              ),
          Key([mod], "r",
@@ -144,8 +168,8 @@ keys = [
 ]
 
 group_names = [
-    ("DEV", {'layout': 'monadtall'}),
     ("WWW", {'layout': 'monadtall'}),
+    ("DEV", {'layout': 'monadtall'}),
     ("CHAT", {'layout': 'monadtall'}),
     ("GAMING", {'layout': 'max'}),
     ("VBOX", {'layout': 'monadtall'}),
@@ -280,7 +304,11 @@ def init_widgets_list():
                        background = colors[4],
                        fontsize = 14
                        ),
-              widget.Pacman(
+              widget.CheckUpdates(
+                       distro = "Arch",
+                       display_format = "{updates}",
+                       colour_have_updates = "b8bb26",
+                       colour_no_updates = "b8bb26",
                        update_interval = 1800,
                        foreground = "b8bb26",
                        mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e sudo pacman -Syu')},
