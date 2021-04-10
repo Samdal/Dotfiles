@@ -70,10 +70,6 @@ keys = [
              lazy.spawn("steam"),
              desc='Start Steam'
              ),
-         Key([mod, "shift"], "l",
-             lazy.spawn("lutris"),
-             desc='Start Lutirs'
-             ),
          Key([mod], "g",
              lazy.spawn("gimp"),
              desc='Start Gimp'
@@ -85,6 +81,10 @@ keys = [
          Key([mod], "b",
              lazy.spawn("krita"),
              desc='Start Krita'
+             ),
+         Key([mod], "p",
+             lazy.spawn("pavucontrol"),
+             desc='Start pavucontrol'
              ),
          ### Switch focus to specific monitor (out of three)
          Key([mod], "w",
@@ -170,7 +170,7 @@ keys = [
 group_names = [
     ("WWW", {'layout': 'monadtall'}),
     ("DEV", {'layout': 'monadtall'}),
-    ("CHAT", {'layout': 'monadtall'}),
+    ("CHAT", {'layout': 'monadwide'}),
     ("GAMING", {'layout': 'max'}),
     ("VBOX", {'layout': 'monadtall'}),
     ("MUSIC", {'layout': 'monadtall'}),
@@ -192,7 +192,8 @@ layout_theme = {"border_width": 1,
 layouts = [
     layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),
-    layout.Floating(**layout_theme)
+    layout.Floating(**layout_theme),
+    layout.MonadWide(**layout_theme),
 ]
 
 colors = [["#282828", "#282828"], # panel background

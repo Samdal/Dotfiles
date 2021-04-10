@@ -51,4 +51,8 @@
 
 (package! platformio-mode)
 
-(package! elcord)
+;;(package! elcord)
+
+;;(package! irony :disable t)
+
+

@@ -60,35 +60,23 @@
 ;; Setting theme
 (setq doom-theme 'doom-gruvbox)
 
-;;PlatformIO config
-(require 'platformio-mode)
-
-;; Add the required company backend.
-(add-to-list 'company-backends 'company-irony)
-
-;; Enable irony for all c++ files, and platformio-mode only
-;; when needed (platformio.ini present in project root).
-(add-hook 'c++-mode-hook (lambda ()
-                           (irony-mode)
-                           (irony-eldoc)
-                           (platformio-conditionally-enable)))
-
-;; Use irony's completion functions.
-(add-hook 'irony-mode-hook
-          (lambda ()
-            (define-key irony-mode-map [remap completion-at-point]
-              'irony-completion-at-point-async)
-
-            (define-key irony-mode-map [remap complete-symbol]
-              'irony-completion-at-point-async)
-
-            (irony-cdb-autosetup-compile-options)))
-
-;; Setup irony for flycheck.
-(add-hook 'flycheck-mode-hook 'flycheck-irony-setup)
-
 ;(require 'elcord)
 ;(elcord-mode)
 
-(after! lsp-rust
-  (setq lsp-rust-server 'rust-analyzer))
+;;(after! lsp-rust
+;;  (setq lsp-rust-server 'rust-analyzer))
+
+
+(defun franco/godot-gdscript-lsp-ignore-error (original-function &rest args)
+  "Ignore the error message resulting from Godot not replying to the `JSONRPC' request."
+  (if (string-equal major-mode "gdscript-mode")
+      (let ((json-data (nth 0 args)))
+        (if (and (string= (gethash "jsonrpc" json-data "") "2.0")
+                 (not (gethash "id" json-data nil))
+                 (not (gethash "method" json-data nil)))
+            nil ; (message "Method not found")
+          (apply original-function args)))
+    (apply original-function args)))
+(advice-add #'lsp--get-message-type :around #'franco/godot-gdscript-lsp-ignore-error)
+
+(setq display-line-numbers-type 'relative)
