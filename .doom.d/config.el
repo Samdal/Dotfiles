@@ -80,3 +80,5 @@
 (advice-add #'lsp--get-message-type :around #'franco/godot-gdscript-lsp-ignore-error)
 
 (setq display-line-numbers-type 'relative)
+
+(setq c-default-style "gnu")
