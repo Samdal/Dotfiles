@@ -82,7 +82,6 @@
 (setq display-line-numbers-type 'relative)
 
 (setq c-default-style "gnu")
-<<<<<<< HEAD
 
 (setq flycheck-clang-include-path '("/home/halvard/Code/gdnative_cpp_example/godot-cpp/include/core/"
                                     "/home/halvard/Code/gdnative_cpp_example/godot-cpp/include/gen/"
@@ -123,6 +122,3 @@
 ;; Number the candidates (use M-1, M-2 etc to select completions).
 (setq company-show-numbers t)
 
-;;(setq-hook! 'c-mode-hook +format-with 'buffer-astyle)
-=======
->>>>>>> 7f48ab8210f01bf6bc95d9cfdf44a26f4253ca23
