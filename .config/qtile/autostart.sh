@@ -9,6 +9,9 @@ picom &
 setxkbmap -layout "no"
 setxkbmap -option caps:escape
 
+#notifications
+dunst &
+
 #audio from virutal machine
 #scream -u -i enp4s0
 
@@ -16,7 +19,7 @@ setxkbmap -option caps:escape
 xsetwacom --set "Wacom Intuos PT M 2 Pen stylus" MapToOutput 2560x1440+1920+240 &
 
 #bluetooth
-blueberry-tray
+blueberry-tray &
 
 #wallpaper
 sh /home/halvard/.config/qtile/slideshow.sh /home/halvard/Nextcloud/sync/bilder/ 5m &

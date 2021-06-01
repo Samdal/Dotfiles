@@ -50,9 +50,11 @@
 ;(unpin! t)
 
 (package! platformio-mode)
+(package! arduino-mode)
+(package! company-tabnine)
+;;(package! astyle)
 
 ;;(package! elcord)
 
 ;;(package! irony :disable t)
-
 

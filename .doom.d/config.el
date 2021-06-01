@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "Halvard Samdal"
+      user-mail-address "samdal@protonmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -80,3 +80,46 @@
 (advice-add #'lsp--get-message-type :around #'franco/godot-gdscript-lsp-ignore-error)
 
 (setq display-line-numbers-type 'relative)
+
+(setq c-default-style "gnu")
+
+(setq flycheck-clang-include-path '("/home/halvard/Code/gdnative_cpp_example/godot-cpp/include/core/"
+                                    "/home/halvard/Code/gdnative_cpp_example/godot-cpp/include/gen/"
+                                    "/home/halvard/Code/gdnative_cpp_example/godot-cpp/include/"
+                                    "/home/halvard/Code/gdnative_cpp_example/godot-cpp/godot-headers/"))
+
+(setq irony-additional-clang-options '("-I/home/halvard/Code/gdnative_cpp_example/godot-cpp/include/core/"
+                                       "-I/home/halvard/Code/gdnative_cpp_example/godot-cpp/include/gen/"
+                                       "-I/home/halvard/Code/gdnative_cpp_example/godot-cpp/include/"
+                                       "-I/home/halvard/Code/gdnative_cpp_example/godot-cpp/godot-headers/"))
+
+(setq flycheck-gcc-args '("-I/home/halvard/Code/Arduino/chickendoor/include"
+                                       "-I/home/halvard/Code/Arduino/chickendoor/src"
+                                       "-I/home/halvard/.platformio/packages/framework-arduino-avr/cores/arduino"
+                                       "-I/home/halvard/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs"
+                                       "-I/home/halvard/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src"
+                                       "-I/home/halvard/.platformio/packages/framework-arduino-avr/libraries/HID/src"
+                                       "-I/home/halvard/.platformio/packages/framework-arduino-avr/libraries/SPI/src"
+                                       "-I/home/halvard/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src"
+                                       "-I/home/halvard/.platformio/packages/framework-arduino-avr/libraries/Wire/src"
+                                       "-I/home/halvard/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/7.3.0/include-fixed"
+                                       "-I/home/halvard/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/7.3.0/include"
+                                       "-I/home/halvard/.platformio/packages/toolchain-atmelavr/avr/include"
+                                       "-I/home/halvard/.platformio/packages/tool-unity"
+                                        "-DPLATFORMIO=50101"
+                                        "-DARDUINO_AVR_PRO"
+                                        "-DF_CPU=16000000L"
+                                        "-DARDUINO_ARCH_AVR"
+                                        "-DARDUINO=10808"
+                                        "-D__AVR_ATmega328P__"))
+
+(require 'flycheck-arduino)
+(add-hook 'arduino-mode-hook #'flycheck-arduino-setup)
+(require 'company-tabnine)
+(add-to-list 'company-backends #'company-tabnine)
+;; Trigger completion immediately.
+(setq company-idle-delay 0)
+;; Number the candidates (use M-1, M-2 etc to select completions).
+(setq company-show-numbers t)
+
+;;(setq-hook! 'c-mode-hook +format-with 'buffer-astyle)
