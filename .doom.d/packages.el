@@ -48,13 +48,3 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
-
-(package! platformio-mode)
-(package! arduino-mode)
-(package! company-tabnine)
-;;(package! astyle)
-
-;;(package! elcord)
-
-;;(package! irony :disable t)
-

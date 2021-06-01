@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-gruvbox)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -53,20 +53,12 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-
-;; Setting the font
-(setq  doom-font (font-spec :family "iosevka" :size 17))
-
-;; Setting theme
-(setq doom-theme 'doom-gruvbox)
-
-;(require 'elcord)
-;(elcord-mode)
-
-;;(after! lsp-rust
-;;  (setq lsp-rust-server 'rust-analyzer))
+;; Setting font
+(setq doom-font (font-spec :family "iosevka" :size 17))
 
 
+
+;; remove error with gdscript LSP
 (defun franco/godot-gdscript-lsp-ignore-error (original-function &rest args)
   "Ignore the error message resulting from Godot not replying to the `JSONRPC' request."
   (if (string-equal major-mode "gdscript-mode")
@@ -79,46 +71,13 @@
     (apply original-function args)))
 (advice-add #'lsp--get-message-type :around #'franco/godot-gdscript-lsp-ignore-error)
 
+;; relative line numbers
 (setq display-line-numbers-type 'relative)
 
-(setq c-default-style "gnu")
+;; C style
+(setq c-default-style "linux")
 
-(setq flycheck-clang-include-path '("/home/halvard/Code/gdnative_cpp_example/godot-cpp/include/core/"
-                                    "/home/halvard/Code/gdnative_cpp_example/godot-cpp/include/gen/"
-                                    "/home/halvard/Code/gdnative_cpp_example/godot-cpp/include/"
-                                    "/home/halvard/Code/gdnative_cpp_example/godot-cpp/godot-headers/"))
-
-(setq irony-additional-clang-options '("-I/home/halvard/Code/gdnative_cpp_example/godot-cpp/include/core/"
-                                       "-I/home/halvard/Code/gdnative_cpp_example/godot-cpp/include/gen/"
-                                       "-I/home/halvard/Code/gdnative_cpp_example/godot-cpp/include/"
-                                       "-I/home/halvard/Code/gdnative_cpp_example/godot-cpp/godot-headers/"))
-
-(setq flycheck-gcc-args '("-I/home/halvard/Code/Arduino/chickendoor/include"
-                                       "-I/home/halvard/Code/Arduino/chickendoor/src"
-                                       "-I/home/halvard/.platformio/packages/framework-arduino-avr/cores/arduino"
-                                       "-I/home/halvard/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs"
-                                       "-I/home/halvard/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src"
-                                       "-I/home/halvard/.platformio/packages/framework-arduino-avr/libraries/HID/src"
-                                       "-I/home/halvard/.platformio/packages/framework-arduino-avr/libraries/SPI/src"
-                                       "-I/home/halvard/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src"
-                                       "-I/home/halvard/.platformio/packages/framework-arduino-avr/libraries/Wire/src"
-                                       "-I/home/halvard/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/7.3.0/include-fixed"
-                                       "-I/home/halvard/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/7.3.0/include"
-                                       "-I/home/halvard/.platformio/packages/toolchain-atmelavr/avr/include"
-                                       "-I/home/halvard/.platformio/packages/tool-unity"
-                                        "-DPLATFORMIO=50101"
-                                        "-DARDUINO_AVR_PRO"
-                                        "-DF_CPU=16000000L"
-                                        "-DARDUINO_ARCH_AVR"
-                                        "-DARDUINO=10808"
-                                        "-D__AVR_ATmega328P__"))
-
-(require 'flycheck-arduino)
-(add-hook 'arduino-mode-hook #'flycheck-arduino-setup)
-(require 'company-tabnine)
-(add-to-list 'company-backends #'company-tabnine)
 ;; Trigger completion immediately.
 (setq company-idle-delay 0)
 ;; Number the candidates (use M-1, M-2 etc to select completions).
 (setq company-show-numbers t)
-
